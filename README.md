@@ -176,11 +176,11 @@ public interface UserService {
 - **addUser.xhtml** : Page d'ajout d'un nouvel utilisateur.
 
 ## Captures d'écran
-![Page de connexion](resources/images/login.png)
-![Tableau de bord administrateur](resources/images/page admin.png)
+![Page de connexion](src/main/webapp/resources/images/login.png)
+![Tableau de bord administrateur](src/main/webapp/resources/images/page admin.png)
 ![Formulaire d'ajout d'un utilisateur](src/main/webapp/resources/images/ajout.png)
-![Formulaire de modification d'un utilisateur](resources/images/modif.png)
-![Tableau de bord utilisateur](resources/images/user-interface.png)
+![Formulaire de modification d'un utilisateur](src/main/webapp/resources/images/modif.png)
+![Tableau de bord utilisateur](src/main/webapp/resources/images/user-interface.png)
 
 
 
