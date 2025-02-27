@@ -7,18 +7,24 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 <h:head>
-   <h:outputStylesheet name="css/primeflex3.css" library="showcase"/>
+   <h:outputStylesheet name="css/styles.css" /> <!-- Custom CSS file -->
+   <title>Authentification</title>
 </h:head>
-<h:form>
-   <p:panel header="Authentification">
-      <p:messages />
-      <h:panelGrid columns="2">
-         <h:outputLabel value="Nom d'utilisateur :" />
-         <p:inputText value="#{loginController.username}" />
-         <h:outputLabel value="Mot de passe :" />
-         <p:password value="#{loginController.password}" />
-         <p:commandButton value="Se connecter" action="#{loginController.login()}" />
-      </h:panelGrid>
-   </p:panel>
-</h:form>
+<h:body>
+   <div class="login-container">
+      <h:form style="margin-left: 300px;margin-right: 300px;margin-top: 100px">
+         <p:panel header="Authentification" styleClass="login-panel">
+            <p:messages />
+            <h:panelGrid columns="2" cellpadding="10">
+               <h:outputLabel value="Nom d'utilisateur :" />
+               <p:inputText value="#{loginController.username}" required="true" />
+
+               <h:outputLabel value="Mot de passe :" />
+               <p:password value="#{loginController.password}" required="true" />
+            </h:panelGrid>
+            <p:commandButton value="Se connecter" action="#{loginController.login()}" styleClass="p-button-primary" />
+         </p:panel>
+      </h:form>
+   </div>
+</h:body>
 </html>

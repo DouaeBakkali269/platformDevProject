@@ -6,11 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.Date;
 
 
-@Entity(name = "AppUser") // Rename the table
+@Entity(name = "AppUser")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

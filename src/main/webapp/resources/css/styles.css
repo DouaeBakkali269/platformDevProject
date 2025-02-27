@@ -1,0 +1,62 @@
+/* Add spacing between buttons */
+.p-button-sm {
+    padding: 0 1rem;
+    font-size: 0.875rem;
+}
+
+/* Align search bar and add button */
+.p-toolbar {
+    margin-bottom: 1rem;
+}
+
+/* Style the search input */
+#searchInput {
+    width: 3000px;
+    margin-right: 1rem;
+}
+
+.p-button-search {
+    margin-left: 1rem; /* Adjust spacing between search bar and button */
+}
+
+/* add user styling form */
+
+/* Center the login form on the page */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    background-color: #f5f5f5; /* Light background color */
+}
+
+/* Style the login panel */
+.login-panel {
+    width: 400px; /* Set a fixed width for the panel */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #ffffff; /* White background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+
+/* Style the header of the panel */
+.login-panel .ui-panel-titlebar {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #007bff; /* Blue background */
+    color: white; /* White text */
+    border-radius: 5px 5px 0 0; /* Rounded corners at the top */
+}
+
+/* Add spacing between the form fields */
+.login-panel .ui-panel-content {
+    padding: 20px;
+}
+
+/* Style the login button */
+.login-panel .p-button-primary {
+    width: 100%; /* Full width button */
+    margin-top: 10px; /* Space above the button */
+}

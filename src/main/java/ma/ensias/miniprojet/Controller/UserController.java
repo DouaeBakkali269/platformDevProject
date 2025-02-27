@@ -13,6 +13,7 @@ import ma.ensias.miniprojet.Service.UserService;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Named
 //@SessionScoped
@@ -29,10 +30,15 @@ public class UserController implements Serializable {
 
     private User newUser = new User();  // Initialize the newUser property
     private List<User> userList;
+    private String filterText; // For search input
+    private List<User> filteredUserList; // Filtered list of users
+
+
 
     @PostConstruct
     public void init() {
         userList = userService.getAllUsers();
+        filteredUserList = userList; // Initialize filtered list
     }
 
 
@@ -46,6 +52,17 @@ public class UserController implements Serializable {
         // Refresh the user list after editing
         userList = userService.getAllUsers();
 
+    }
+
+    public void filterUsers() {
+        if (filterText == null || filterText.isEmpty()) {
+            filteredUserList = userList; // Show all users if no filter text
+        } else {
+            filteredUserList = userList.stream()
+                    .filter(user -> user.getNom().toLowerCase().contains(filterText.toLowerCase()) ||
+                            user.getPrenom().toLowerCase().contains(filterText.toLowerCase()))
+                    .collect(Collectors.toList());
+        }
     }
 
 

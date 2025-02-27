@@ -27,14 +27,14 @@
             <h:outputLabel value="Mot de passe :" />
             <p:password value="#{userController.newUser.password}" required="true" />
 
-            <h:outputLabel value="Date de Naissance :" />
-            <p:calendar value="#{userController.newUser.dateNaissance}" pattern="dd/MM/yyyy" required="true" />
+            <h:outputLabel for="dateNaissance" value="Date de Naissance :" />
+            <p:calendar id="dateNaissance" value="#{userController.newUser.dateNaissance}" pattern="dd/MM/yyyy" converter="dateConverter" validator="dateValidator" required="true" />
 
-            <h:outputLabel value="Solde Compte :" />
-            <p:inputText value="#{userController.newUser.soldeCompte}" required="true" />
+            <h:outputLabel for="soldeCompte" value="Solde de Compte :" />
+            <p:inputNumber id="soldeCompte" value="#{userController.newUser.soldeCompte}" converter="currencyConverter" validator="balanceValidator" required="true" />
 
-            <h:outputLabel value="Adresse :" />
-            <p:inputText value="#{userController.newUser.adresse}" required="true" />
+            <h:outputLabel for="adresse" value="Adresse :" />
+            <p:inputTextarea id="adresse" value="#{userController.newUser.adresse}" converter="addressConverter" validator="addressValidator" required="true" />
 
             <h:outputLabel value="Ville :" />
             <p:inputText value="#{userController.newUser.ville}" required="true" />
@@ -53,7 +53,7 @@
             </p:selectOneMenu>
         </h:panelGrid>
 
-        <p:commandButton value="Ajouter" action="#{userController.addUser(userController.newUser)}" ajax="false" />
+        <p:commandButton value="Ajouter" action="#{userController.addUser(userController.newUser)}" ajax="false" style="margin-right: 3px" />
         <p:commandButton value="Annuler" action="admin.xhtml?faces-redirect=true" immediate="true" />
     </h:form>
 </h:body>

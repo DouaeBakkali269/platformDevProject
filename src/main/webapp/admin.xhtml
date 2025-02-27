@@ -7,43 +7,88 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 <h:head>
-    <h:outputStylesheet name="css/primeflex3.css" library="showcase"/>
+    <h:outputStylesheet name="css/styles.css" />
+    <title>User Management</title>
 </h:head>
-<f:view>
-    <h:form id="mainForm">
-        <!-- Add an ID to the dataTable -->
-        <p:dataTable id="userTable" value="#{userController.userList}" var="user"
-                     selectionMode="single"
-                     selection="#{userController.selectedUser}"
-                     rowKey="#{user.id}">
-            <p:column selectionMode="single" />
-            <p:column headerText="Nom">#{user.nom}</p:column>
-            <p:column headerText="Prénom">#{user.prenom}</p:column>
-            <p:column headerText="Solde">#{user.soldeCompte} MAD</p:column>
-            <p:column headerText="Actions">
-                <p:commandButton value="Modifier" oncomplete="PF('editDialog').show()" actionListener="#{userController.setSelectedUser(user)}" update=":editForm" />
-                <p:commandButton value="Supprimer" action="#{userController.deleteUser(user)}" update="@form" />
-            </p:column>
-        </p:dataTable>
-    </h:form>
-    <!-- Edit Dialog -->
-    <p:dialog header="Modifier utilisateur" widgetVar="editDialog">
-        <h:form id="editForm">
-            <h:panelGrid columns="2">
-                <h:outputLabel value="Nom :" />
-                <p:inputText value="#{userController.selectedUser.nom}" />
-                <h:outputLabel value="Prénom :" />
-                <p:inputText value="#{userController.selectedUser.prenom}" />
-                <h:outputLabel value="Solde :" />
-                <p:inputText value="#{userController.selectedUser.soldeCompte}" />
-                <p:commandButton value="Sauvegarder"
+<h:body>
+    <f:view>
+        <!-- First Section: Title and Déconnexion Button -->
+        <h:form>
+            <p:toolbar>
+                <f:facet name="left">
+                    <h:outputText value="Table des Utilisateurs" style="font-size: 18px; font-weight: bold;" />
+                </f:facet>
+                <f:facet name="right">
+                    <p:commandButton value="Déconnexion" action="#{loginController.logout()}"
+                                     icon="pi pi-sign-out" styleClass="p-button-danger" />
+                </f:facet>
+            </p:toolbar>
+        </h:form>
+
+        <!-- Second Section: Search Bar and Ajouter un Utilisateur Button -->
+        <h:form>
+            <p:toolbar>
+                <f:facet name="left">
+                    <p:inputText id="searchInput" value="#{userController.filterText}"
+                                 placeholder="Rechercher un utilisateur..." style="width: 300px; margin-right: 10px;" />
+                    <p:commandButton value="Rechercher" icon="pi pi-search"
+                                     action="#{userController.filterUsers}"
+                                     update=":mainForm:userTable" styleClass="p-button-outlined" />
+                </f:facet>
+                <f:facet name="right">
+                    <p:commandButton value="Ajouter un utilisateur" action="addUser.xhtml?faces-redirect=true"
+                                     icon="pi pi-plus" styleClass="p-button-success" />
+                </f:facet>
+            </p:toolbar>
+        </h:form>
+
+        <!-- Main Content: Data Table -->
+        <h:form id="mainForm">
+            <p:growl id="growl" showDetail="true" autoUpdate="true" />
+
+            <p:dataTable id="userTable" value="#{userController.filteredUserList}" var="user"
+                         paginator="true" rows="10" rowsPerPageTemplate="5,10,15"
+                         paginatorPosition="bottom" sortMode="multiple" selectionMode="single"
+                         selection="#{userController.selectedUser}" rowKey="#{user.id}"
+                         styleClass="p-datatable-striped">
+
+                <p:column headerText="Nom" sortBy="#{user.nom}">#{user.nom}</p:column>
+                <p:column headerText="Prénom" sortBy="#{user.prenom}">#{user.prenom}</p:column>
+                <p:column headerText="Solde" sortBy="#{user.soldeCompte}">#{user.soldeCompte} MAD</p:column>
+                <p:column headerText="Actions" style="width: 300px;">
+                    <div style="display: inline-flex; gap: 0.5rem;">
+                        <p:commandButton value="Modifier" icon="pi pi-pencil"
+                                         oncomplete="PF('editDialog').show()"
+                                         actionListener="#{userController.setSelectedUser(user)}"
+                                         update=":editForm" styleClass="p-button-warning" />
+
+                        <p:commandButton value="Supprimer" icon="pi pi-trash"
+                                         action="#{userController.deleteUser(user)}"
+                                         update=":mainForm:userTable"
+                                         styleClass="p-button-danger"
+                                         onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');" />
+                    </div>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+
+        <!-- Edit Dialog -->
+        <p:dialog header="Modifier utilisateur" widgetVar="editDialog" modal="true" resizable="false">
+            <h:form id="editForm">
+                <h:panelGrid columns="2" cellpadding="5">
+                    <h:outputLabel value="Nom :" />
+                    <p:inputText value="#{userController.selectedUser.nom}" required="true" placeholder="Entrez le nom" />
+                    <h:outputLabel value="Prénom :" />
+                    <p:inputText value="#{userController.selectedUser.prenom}" required="true" placeholder="Entrez le prénom" />
+                    <h:outputLabel value="Solde :" />
+                    <p:inputNumber value="#{userController.selectedUser.soldeCompte}" required="true" placeholder="Entrez le solde" />
+                </h:panelGrid>
+                <p:commandButton value="Sauvegarder" icon="pi pi-check"
                                  action="#{userController.editUser()}"
                                  oncomplete="PF('editDialog').hide()"
-                                 update="@form :mainForm:userTable" />
-            </h:panelGrid>
-        </h:form>
-    </p:dialog>
-    <p:commandButton value="Ajouter un utilisateur" action="addUser.xhtml?faces-redirect=true" />
-    <p:commandButton value="Déconnexion" action="#{loginController.logout()}" style="margin-top: 20px;" />
-</f:view>
+                                 update=":mainForm:userTable :growl" styleClass="p-button-success" />
+            </h:form>
+        </p:dialog>
+    </f:view>
+</h:body>
 </html>
