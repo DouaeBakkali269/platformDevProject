@@ -48,7 +48,7 @@ Cette application web a été développée en utilisant **JSF (Jakarta Server Fa
 
 ## Prérequis
 - **Java Development Kit 17**
-- **Apache Maven 3.9 **
+- **Apache Maven 3.9**
 - **Serveur d'application**: WildFly 35
 - **Base de données** : MySQL
 
@@ -176,12 +176,11 @@ public interface UserService {
 - **addUser.xhtml** : Page d'ajout d'un nouvel utilisateur.
 
 ## Captures d'écran
-![Page de connexion](images/login.png)
-![Tableau de bord administrateur](images/page admin.png)
-![Formulaire d'ajout d'un utilisateur](images/ajout.png)
-![Formulaire de modification d'un utilisateur](images/modif.png)
-
-![Tableau de bord utilisateur](images/user-interface.png)
+![Page de connexion](resources/images/login.png)
+![Tableau de bord administrateur](resources/images/page admin.png)
+![Formulaire d'ajout d'un utilisateur](resources/images/ajout.png)
+![Formulaire de modification d'un utilisateur](resources/images/modif.png)
+![Tableau de bord utilisateur](resources/images/user-interface.png)
 
 
 
