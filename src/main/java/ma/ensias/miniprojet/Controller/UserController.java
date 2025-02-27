@@ -19,13 +19,12 @@ public class UserController implements Serializable {
     private UserService userService;
     private User selectedUser;
 
-
     public void deleteUser(User user) {
         userService.deleteUser(user);
     }
 
     public void editUser() {
-
+        // Implement edit user logic here
     }
 
     public List<User> getUserList() {

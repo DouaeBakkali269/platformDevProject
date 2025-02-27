@@ -1,11 +1,17 @@
 package ma.ensias.miniprojet.Model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
 
-//@Entity
-//@Table(name = "users")
+
+@Entity(name = "AppUser") // Rename the table
+
 public class User implements Serializable {
 
     public User() {
@@ -13,7 +19,7 @@ public class User implements Serializable {
 
     public User(long id,String Username, String Password,String nom, String prenom, Date dateNaissance, Double soldeCompte, String adresse, String ville, String codePostal, String pays, String role) {
         this.id = id;
-        this.Username = Username;
+        this.username = Username;
         this.password = Password;
         this.nom = nom;
         this.prenom = prenom;
@@ -26,10 +32,10 @@ public class User implements Serializable {
         this.role = role;
     }
 
-    //@Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String Username;
+    private String username;
     private String password;
     private String nom;
     private String prenom;
@@ -125,11 +131,11 @@ public class User implements Serializable {
     }
 
     public String getUsername() {
-        return Username;
+        return username;
     }
 
     public void setUsername(String username) {
-        Username = username;
+        username = username;
     }
 
     public String getPassword() {

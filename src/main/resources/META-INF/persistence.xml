@@ -1,9 +1,16 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <persistence xmlns="https://jakarta.ee/xml/ns/persistence"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
              version="3.0">
-    <persistence-unit name="default">
-
+    <persistence-unit name="userPU" transaction-type="JTA">
+        <jta-data-source>java:/MySqlDS</jta-data-source>
+        <class>ma.ensias.miniprojet.Model.User</class>
+        <properties>
+            <!-- You can keep Hibernate-specific properties if needed -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <!-- Don't include connection properties here since they're in the datasource -->
+        </properties>
     </persistence-unit>
 </persistence>

@@ -13,22 +13,34 @@ import java.io.Serializable;
 @Named
 @SessionScoped
 public class LoginController implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     private String username;
     private String password;
+
     @Inject
-    UserService us;
+    private UserService userService;
 
     public String login() {
-        User mUser= null;
+        User mUser = null;
         try {
-            mUser = us.authenticate(username,password);
-            if(mUser.getRole().equals("ADMIN")){
-                return "admin.xhtml?faces-redirect=true";
+            mUser = userService.authenticate(username, password);
+            if (mUser != null) {
+                // Store the logged-in user in the session
+                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("loggedUser", mUser);
+
+                // Redirect based on user role
+                if (mUser.getRole().equals("ADMIN")) {
+                    return "admin.xhtml?faces-redirect=true";
+                } else {
+                    return "user.xhtml?faces-redirect=true";
+                }
             }
-            return "user.xhtml?faces-redirect=true";
         } catch (UserNotFoundException e) {
             return "error.xhtml?faces-redirect=true";
         }
+        return "login.xhtml?faces-redirect=true"; // Redirect back to login if authentication fails
     }
 
     public String logout() {
@@ -36,13 +48,9 @@ public class LoginController implements Serializable {
         return "login.xhtml?faces-redirect=true";
     }
 
-
-
-
-    // getters and setters
-
-    public void setPassword(String password) {
-        this.password = password;
+    // Getters and Setters
+    public String getUsername() {
+        return username;
     }
 
     public void setUsername(String username) {
@@ -53,7 +61,7 @@ public class LoginController implements Serializable {
         return password;
     }
 
-    public String getUsername() {
-        return username;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
