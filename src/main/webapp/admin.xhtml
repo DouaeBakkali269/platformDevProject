@@ -10,8 +10,9 @@
     <h:outputStylesheet name="css/primeflex3.css" library="showcase"/>
 </h:head>
 <f:view>
-    <h:form>
-        <p:dataTable value="#{userController.userList}" var="user"
+    <h:form id="mainForm">
+        <!-- Add an ID to the dataTable -->
+        <p:dataTable id="userTable" value="#{userController.userList}" var="user"
                      selectionMode="single"
                      selection="#{userController.selectedUser}"
                      rowKey="#{user.id}">
@@ -38,7 +39,7 @@
                 <p:commandButton value="Sauvegarder"
                                  action="#{userController.editUser()}"
                                  oncomplete="PF('editDialog').hide()"
-                                 update="@form :userTable" />
+                                 update="@form :mainForm:userTable" />
             </h:panelGrid>
         </h:form>
     </p:dialog>

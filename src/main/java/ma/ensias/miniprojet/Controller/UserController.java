@@ -4,6 +4,7 @@ import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
+import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import lombok.Data;
@@ -14,7 +15,8 @@ import java.io.Serializable;
 import java.util.List;
 
 @Named
-@SessionScoped
+//@SessionScoped
+@ViewScoped
 @Data
 
 public class UserController implements Serializable {
@@ -43,6 +45,7 @@ public class UserController implements Serializable {
         userService.updateUser(selectedUser);
         // Refresh the user list after editing
         userList = userService.getAllUsers();
+
     }
 
 
