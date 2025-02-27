@@ -35,8 +35,10 @@
                 <p:inputText value="#{userController.selectedUser.prenom}" />
                 <h:outputLabel value="Solde :" />
                 <p:inputText value="#{userController.selectedUser.soldeCompte}" />
-                <p:commandButton value="Sauvegarder" action="#{userController.editUser()}" oncomplete="PF('editDialog').hide()" update="@form" />
-
+                <p:commandButton value="Sauvegarder"
+                                 action="#{userController.editUser()}"
+                                 oncomplete="PF('editDialog').hide()"
+                                 update="@form :userTable" />
             </h:panelGrid>
         </h:form>
     </p:dialog>

@@ -1,5 +1,6 @@
 package ma.ensias.miniprojet.Controller;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
@@ -25,6 +26,12 @@ public class UserController implements Serializable {
     private User selectedUser;
 
     private User newUser = new User();  // Initialize the newUser property
+    private List<User> userList;
+
+    @PostConstruct
+    public void init() {
+        userList = userService.getAllUsers();
+    }
 
 
     // delete user
@@ -32,11 +39,12 @@ public class UserController implements Serializable {
         userService.deleteUser(user);
     }
 
-
-    // edit user method
-    public void editUser(User user) {
-        userService.updateUser(user);
+    public void editUser() {
+        userService.updateUser(selectedUser);
+        // Refresh the user list after editing
+        userList = userService.getAllUsers();
     }
+
 
     // get all users
     public List<User> getUserList() {
