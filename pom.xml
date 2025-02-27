@@ -28,7 +28,6 @@
     
 
         <!-- MySQL Connector -->
-        <!-- Pilote MySQL -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -66,6 +65,16 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <!--  Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.26</version>
+            <scope>provided</scope>
+        </dependency>
+
+
     </dependencies>
 
     <build>

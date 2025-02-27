@@ -4,6 +4,7 @@ import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import lombok.Data;
 import ma.ensias.miniprojet.Exceptions.UserNotFoundException;
 import ma.ensias.miniprojet.Model.User;
 import ma.ensias.miniprojet.Service.UserService;
@@ -12,6 +13,8 @@ import java.io.Serializable;
 
 @Named
 @SessionScoped
+@Data
+
 public class LoginController implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -33,7 +36,7 @@ public class LoginController implements Serializable {
                 // Redirect based on user role
                 if (mUser.getRole().equals("ADMIN")) {
                     return "admin.xhtml?faces-redirect=true";
-                } else {
+                } else if (mUser.getRole().equals("USER")) {
                     return "user.xhtml?faces-redirect=true";
                 }
             }
@@ -48,20 +51,4 @@ public class LoginController implements Serializable {
         return "login.xhtml?faces-redirect=true";
     }
 
-    // Getters and Setters
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }

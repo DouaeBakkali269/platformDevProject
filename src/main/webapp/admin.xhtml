@@ -24,7 +24,6 @@
                 <p:commandButton value="Supprimer" action="#{userController.deleteUser(user)}" update="@form" />
             </p:column>
         </p:dataTable>
-        <p:commandButton value="Ajouter un utilisateur" action="addUser.xhtml?faces-redirect=true" />
     </h:form>
     <!-- Edit Dialog -->
     <p:dialog header="Modifier utilisateur" widgetVar="editDialog">
@@ -37,8 +36,11 @@
                 <h:outputLabel value="Solde :" />
                 <p:inputText value="#{userController.selectedUser.soldeCompte}" />
                 <p:commandButton value="Sauvegarder" action="#{userController.editUser()}" oncomplete="PF('editDialog').hide()" update="@form" />
+
             </h:panelGrid>
         </h:form>
     </p:dialog>
+    <p:commandButton value="Ajouter un utilisateur" action="addUser.xhtml?faces-redirect=true" />
+    <p:commandButton value="Déconnexion" action="#{loginController.logout()}" style="margin-top: 20px;" />
 </f:view>
 </html>

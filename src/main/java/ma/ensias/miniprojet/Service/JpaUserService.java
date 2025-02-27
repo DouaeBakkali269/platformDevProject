@@ -8,18 +8,38 @@ import ma.ensias.miniprojet.Exceptions.UserNotFoundException;
 import ma.ensias.miniprojet.Model.User;
 import java.io.Serializable;
 import java.util.List;
-
-@Stateless // Stateless for automatic transaction management in Jakarta EE
+@Stateless
 public class JpaUserService implements Serializable, UserService {
 
     private static final long serialVersionUID = 1L;
 
     @PersistenceContext(unitName = "userPU")
-    private EntityManager em; // Injected automatically
+    private EntityManager em;
+
+    @Override
+    public List<User> getAllUsers() {
+        return em.createQuery("SELECT u FROM AppUser u", User.class).getResultList();
+    }
+
+    @Override
+    public User getLoggedUser() {
+        User loggedUser = (User) FacesContext.getCurrentInstance()
+                .getExternalContext()
+                .getSessionMap()
+                .get("loggedUser");
+        if (loggedUser == null) {
+            System.out.println("No logged-in user found in session.");
+        } else {
+            System.out.println("Logged-in user: " + loggedUser.getUsername());
+        }
+        return loggedUser;
+    }
+
 
     @Override
     public void addUser(User user) {
-        em.persist(user);
+        em.merge(user);
+
     }
 
     @Override
@@ -33,26 +53,17 @@ public class JpaUserService implements Serializable, UserService {
     }
 
     @Override
-    public User getLoggedUser() {
-        return (User) FacesContext.getCurrentInstance()
-                .getExternalContext()
-                .getSessionMap()
-                .get("loggedUser");
-    }
-
-    @Override
-    public List<User> getAllUsers() {
-        return em.createQuery("SELECT u FROM AppUser  u", User.class).getResultList();
-    }
-
-    @Override
     public User authenticate(String username, String password) throws UserNotFoundException {
+        System.out.println("Authenticating user: " + username);
         try {
-            return em.createQuery("SELECT u FROM AppUser  u WHERE u.username = :username AND u.password = :password", User.class)
+            User user = em.createQuery("SELECT u FROM AppUser u WHERE u.username = :username AND u.password = :password", User.class)
                     .setParameter("username", username)
                     .setParameter("password", password)
                     .getSingleResult();
+            System.out.println("User found: " + user.getUsername());
+            return user;
         } catch (Exception e) {
+            System.out.println("Authentication failed: " + e.getMessage());
             throw new UserNotFoundException("Authentication failed: " + e.getMessage());
         }
     }

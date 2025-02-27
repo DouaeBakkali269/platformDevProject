@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Ajouter un Utilisateur</title>
+</h:head>
+
+<h:body>
+    <h:form id="addUserForm">
+        <h3>Ajouter un Utilisateur</h3>
+
+        <h:panelGrid columns="2">
+            <h:outputLabel value="Nom :" />
+            <p:inputText value="#{userController.newUser.nom}" required="true" />
+
+            <h:outputLabel value="Prénom :" />
+            <p:inputText value="#{userController.newUser.prenom}" required="true" />
+
+            <h:outputLabel value="Nom d'utilisateur :" />
+            <p:inputText value="#{userController.newUser.username}" required="true" />
+
+            <h:outputLabel value="Mot de passe :" />
+            <p:password value="#{userController.newUser.password}" required="true" />
+
+            <h:outputLabel value="Date de Naissance :" />
+            <p:calendar value="#{userController.newUser.dateNaissance}" pattern="dd/MM/yyyy" required="true" />
+
+            <h:outputLabel value="Solde Compte :" />
+            <p:inputText value="#{userController.newUser.soldeCompte}" required="true" />
+
+            <h:outputLabel value="Adresse :" />
+            <p:inputText value="#{userController.newUser.adresse}" required="true" />
+
+            <h:outputLabel value="Ville :" />
+            <p:inputText value="#{userController.newUser.ville}" required="true" />
+
+            <h:outputLabel value="Code Postal :" />
+            <p:inputText value="#{userController.newUser.codePostal}" required="true" />
+
+            <h:outputLabel value="Pays :" />
+            <p:inputText value="#{userController.newUser.pays}" required="true" />
+
+            <h:outputLabel value="Rôle :" />
+            <p:selectOneMenu value="#{userController.newUser.role}">
+                <f:selectItem itemLabel="Sélectionner un rôle" itemValue="" />
+                <f:selectItem itemLabel="Admin" itemValue="ADMIN" />
+                <f:selectItem itemLabel="Utilisateur" itemValue="USER" />
+            </p:selectOneMenu>
+        </h:panelGrid>
+
+        <p:commandButton value="Ajouter" action="#{userController.addUser(userController.newUser)}" ajax="false" />
+        <p:commandButton value="Annuler" action="admin.xhtml?faces-redirect=true" immediate="true" />
+    </h:form>
+</h:body>
+</html>
