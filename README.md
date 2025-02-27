@@ -178,7 +178,7 @@ public interface UserService {
 ## Captures d'écran
 ![Page de connexion](resources/images/login.png)
 ![Tableau de bord administrateur](resources/images/page admin.png)
-![Formulaire d'ajout d'un utilisateur](resources/images/ajout.png)
+![Formulaire d'ajout d'un utilisateur](src/main/webapp/resources/images/ajout.png)
 ![Formulaire de modification d'un utilisateur](resources/images/modif.png)
 ![Tableau de bord utilisateur](resources/images/user-interface.png)
 
